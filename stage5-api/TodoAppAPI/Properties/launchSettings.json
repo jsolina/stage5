@@ -1,0 +1,46 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:10554",
+      "sslPort": 44354
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "MYSQL_CONNECTIONSTRING": "server=localhost;database=todo_app;username=root;password=admin;port=3307;SslMode=none;",
+        "JWT_ISSUER": "apim-idp",
+        "JWT_PUBLIC_KEY": "public-keycloak.xml",
+        "CLIENT_NAME": "ppg-remittance",
+        "JWT_ISSUER_KEYCLOAK": "https://dev.ppspepp.com/auth/realms/Development",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "TodoAppAPI": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "MYSQL_CONNECTIONSTRING": "server=localhost;database=todo_app;username=root;password=admin;port=3307;SslMode=none;",
+        "SEQ_URL": "http://localhost:5341",
+        "JWT_ISSUER": "apim-idp",
+        "JWT_PUBLIC_KEY": "public-keycloak.xml",
+        "CLIENT_NAME": "ppg-disbursement",
+        "UPLOADED_CSV_PATH": "/uploads",
+        "JWT_ISSUER_KEYCLOAK": "https://dev.ppspepp.com/auth/realms/Development/protocol/openid-connect/token",
+        "LOG_FILE_PATH": "/logs/log.json",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "HEALTHCHECKS_UI_URL": "http://localhost:50001/payouts/health-ui-response",
+        "RABBITMQ_HOST": "172.17.129.13",
+        "RABBITMQ_VHOST": "payouts-validation-dev",
+        "RABBITMQ_USER": "payouts-dev",
+        "RABBITMQ_PASS": "payouts-dev"
+      },
+      "applicationUrl": "http://localhost:5001;http://localhost:5000"
+    }
+  }
+}

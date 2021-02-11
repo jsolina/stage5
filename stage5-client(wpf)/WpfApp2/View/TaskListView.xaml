@@ -1,0 +1,81 @@
+﻿<Window x:Class="WpfApp2.View.TaskListView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp2.View"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"  
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="Stage 5 (TodoAPP) - Task List" Width="1175" WindowStartupLocation="CenterScreen">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <StackPanel>
+            <materialDesign:Card Padding="25" Margin="10,10,10,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="75"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0"  Grid.Column="0"  Grid.ColumnSpan="1" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Content="Todo List/ Task List"></Label>
+                        <Button Grid.Row="0" Grid.Column="1" Margin="10" Content="Add Task" Command="{Binding AddCommands}"/>
+                    </Grid>
+
+                    <DataGrid Grid.Row="1" Name="TaskListGrid" AutoGenerateColumns="False" Margin="0" ItemsSource="{Binding TaskLists}" IsReadOnly="True" Grid.RowSpan="2" SelectionMode="Single"
+                          CurrentCell="{Binding CurrentCell}">
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                            <DataGridTextColumn Header="Task Name/Details" Binding="{Binding TaskName}"/>
+                            <DataGridTextColumn Header="Description" Binding="{Binding TaskDetails}"/>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                            <DataGridTextColumn Header="Created At" Binding="{Binding CreatedAt}"/>
+                            <DataGridTextColumn Header="Last Modified" Binding="{Binding LastModified}"/>
+                            <DataGridTemplateColumn Header="View Items">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding Path=DataContext.ViewCommands,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding  ElementName=TaskListGrid, Path=SelectedItem.Id}" Content="{materialDesign:PackIcon search}" ToolTip="View Item" Style="{StaticResource MaterialDesignToolButton}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="Update">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding Path=DataContext.UpdateCommands,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding ElementName=TaskListGrid, Path=SelectedItem.Id}" Content="{materialDesign:PackIcon edit}" ToolTip="Update Item"  Style="{StaticResource MaterialDesignFlatButton}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header="Delete">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Command="{Binding Path=DataContext.DeleteCommand,RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding ElementName=TaskListGrid,Path=SelectedItem.Id}" Content="{materialDesign:PackIcon delete}" ToolTip="Delete Item" Style="{DynamicResource MaterialDesignFlatAccentButton}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+
+                    </DataGrid>
+                </Grid>
+            </materialDesign:Card>
+
+        </StackPanel>
+
+    </ScrollViewer>
+
+        
+</Window>
